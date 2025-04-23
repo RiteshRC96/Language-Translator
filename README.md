@@ -17,16 +17,16 @@ It translates text between various languages and lets users **listen** to both o
 ---
 
 ## 🌍 Supported Languages
-English
-Hindi
-Marathi
-Bengali
-Gujarati
-French
-German
-Spanish
-Japanese
-Chinese
+- English
+- Hindi
+- Marathi
+- Bengali
+- Gujarati
+- French
+- German
+- Spanish
+- Japanese
+- Chinese
 
 ---
 
