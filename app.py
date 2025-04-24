@@ -37,9 +37,9 @@ def query_llama3(text, source_lang, target_lang):
     return response.content
 
 # Function to convert text to audio
-def text_to_audio(text):
+def text_to_audio(text, lang="en"):
     try:
-        tts = gTTS(text=text)
+        tts = gTTS(text=text, lang=lang)
         with NamedTemporaryFile(delete=False, suffix=".mp3") as f:
             tts.write_to_fp(f)
             return f.name
@@ -84,7 +84,7 @@ if st.session_state.translated:
 # Audio buttons
 if st.session_state.text_input:
     if st.button("🔊 Listen to Input Text"):
-        audio_path = text_to_audio(st.session_state.text_input)
+        audio_path = text_to_audio(st.session_state.text_input, LANGUAGES[source_lang])
         if audio_path:
             with open(audio_path, 'rb') as audio_file:
                 audio_bytes = audio_file.read()
@@ -92,7 +92,7 @@ if st.session_state.text_input:
 
 if st.session_state.translated:
     if st.button("🔊 Listen to Translated Text"):
-        audio_path = text_to_audio(st.session_state.translated)
+        audio_path = text_to_audio(st.session_state.translated, LANGUAGES[target_lang])
         if audio_path:
             with open(audio_path, 'rb') as audio_file:
                 audio_bytes = audio_file.read()
