@@ -86,12 +86,10 @@ EchoLango is your multilingual assistant for:
 🔸 Input:
 - Source Language: English
 - Target Language: Hindi
-- Text to Translate:
-- Where is the nearest hospital?
+- Text to Translate: Where is the nearest hospital?
 
 🔸 Output:
-- Translated Text:
-- सबसे नज़दीकी अस्पताल कहाँ है?
+- Translated Text: सबसे नज़दीकी अस्पताल कहाँ है?
 
 ---
 
