@@ -5,3 +5,4 @@ langchain-huggingface==0.1.2
 sentence-transformers==3.4.1
 torch==2.6.0
 gTTS==2.5.4
+langdetect
