@@ -2,8 +2,6 @@ import streamlit as st
 from languages import LANGUAGES
 from langdetect import detect, LangDetectException
 from gtts import gTTS
-import base64
-from io import BytesIO
 from langchain.schema import HumanMessage, SystemMessage
 from langchain_groq import ChatGroq
 from tempfile import NamedTemporaryFile
@@ -20,8 +18,9 @@ st.markdown("---")
 chat = ChatGroq(
     temperature=0.7,
     model_name="llama3-70b-8192",
-    groq_api_key="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"  # 🔁 Replace with your actual key
+    groq_api_key="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"  # replace with your actual key
 )
+
 # Function to translate
 def query_llama3(text, source_lang, target_lang):
     system_prompt = f"""
@@ -55,40 +54,49 @@ with col1:
 with col2:
     target_lang = st.selectbox("🌍 Target Language", LANGUAGES.keys(), index=1)
 
-# Input text
-text_input = st.text_area("✍️ Enter text to translate:", height=150)
+# Session state defaults
+if "text_input" not in st.session_state:
+    st.session_state.text_input = ""
+if "translated" not in st.session_state:
+    st.session_state.translated = ""
 
-# Output box placeholder
-translated_output = st.empty()
+# Input text
+st.session_state.text_input = st.text_area("✍️ Enter text to translate:", value=st.session_state.text_input, height=150)
 
 # Buttons
 btn_col1, btn_col2, btn_col3 = st.columns(3)
 with btn_col2:
     if st.button("🔁 Translate"):
-        if text_input.strip():
+        if st.session_state.text_input.strip():
             with st.spinner("Translating..."):
-                translated = query_llama3(text_input, source_lang, target_lang)
-                translated_output.text_area("✅ Translated Text", translated, height=150)
-                st.session_state["translated"] = translated
+                st.session_state.translated = query_llama3(
+                    st.session_state.text_input,
+                    source_lang,
+                    target_lang
+                )
         else:
-            st.warning("Please enter text.")
+            st.warning("⚠️ Please enter text.")
+
+# Output box
+if st.session_state.translated:
+    st.text_area("✅ Translated Text", value=st.session_state.translated, height=150)
 
 # Audio buttons
-if text_input:
+if st.session_state.text_input:
     if st.button("🔊 Listen to Input Text"):
-        audio_path = text_to_audio(text_input)
+        audio_path = text_to_audio(st.session_state.text_input)
         if audio_path:
-            audio_file = open(audio_path, 'rb')
-            audio_bytes = audio_file.read()
-            st.audio(audio_bytes, format='audio/mp3')
+            with open(audio_path, 'rb') as audio_file:
+                audio_bytes = audio_file.read()
+                st.audio(audio_bytes, format='audio/mp3')
 
-if "translated" in st.session_state:
+if st.session_state.translated:
     if st.button("🔊 Listen to Translated Text"):
-        audio_path = text_to_audio(st.session_state["translated"])
+        audio_path = text_to_audio(st.session_state.translated)
         if audio_path:
-            audio_file = open(audio_path, 'rb')
-            audio_bytes = audio_file.read()
-            st.audio(audio_bytes, format='audio/mp3')
+            with open(audio_path, 'rb') as audio_file:
+                audio_bytes = audio_file.read()
+                st.audio(audio_bytes, format='audio/mp3')
 
 # Footer
 st.markdown("---")
