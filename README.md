@@ -42,8 +42,65 @@ It translates text between various languages and lets users **listen** to both o
 
 ## 📦 Installation
 
-### 1. Clone the repository
-
+1. **Clone the repo**:
 ```bash
-git clone https://github.com/your-username/echolango.git
-cd echolango
+git clone https://github.com/RiteshRC96/Language-Translator.git
+```
+
+2. **Install dependencies**:
+```bash
+pip install -r requirements.txt
+```
+
+3. **Set up Groq API Key**:
+Open `app.py` and set your key:
+```python
+GROQ_API_KEY = "your_groq_api_key_here"
+```
+
+4. **Run the app**:
+```bash
+streamlit run app.py
+```
+
+---
+
+## 📸 Screenshots
+![Language Translator](./EchoLango-Demo1.png)
+![Language Translator](./EchoLango-Demo2.png)
+![Language Translator](./EchoLango-Demo3.png)
+
+---
+
+## ✏️ Usage
+EchoLango is your multilingual assistant for:
+
+- 🌍 Language Translation
+- 🗣️ Text-to-Speech Playback
+- 🧠 AI-Powered Accuracy
+- 🧑‍🏫 Learning New Languages
+  
+---
+
+## 📌 Example
+🔸 Input:
+- Source Language: English
+- Target Language: Hindi
+- Text to Translate:
+- Where is the nearest hospital?
+
+🔸 Output:
+- Translated Text:
+- सबसे नज़दीकी अस्पताल कहाँ है?
+
+---
+
+## 🙌 Credits
+Created by Ritesh Chougule ✨
+
+---
+
+## 📄 License
+This project is open-source and available under the [MIT License](LICENSE).
+
+
