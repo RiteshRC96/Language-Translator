@@ -3,6 +3,7 @@
 **EchoLango** is a multilingual translation web app built with **Streamlit**, powered by **LLaMA 3 via Groq API**, and enhanced with **gTTS** for text-to-speech functionality.
 
 It translates text between various languages and lets users **listen** to both original and translated content.
+Here is your app:- https://language-translator-ritesh.streamlit.app/
 
 ---
 
